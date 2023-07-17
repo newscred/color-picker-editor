@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import React from "react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import reactCSS from "reactcss";
 import { SketchPicker, ColorResult } from "react-color";
 import useHostChannel from "@/hooks/useHostChannel";
@@ -34,11 +34,11 @@ export default function Component() {
           return;
         }
         case "field-value": {
-          setColor(message?.content?.color ?? DEFAULT_COLOR);
+          if (message?.content?.color) setColor(message?.content?.color);
           return;
         }
         case "field-config": {
-          setConfig(message.config ?? "");
+          setConfig(message.config ?? "{}");
           return;
         }
       }
@@ -75,6 +75,32 @@ export default function Component() {
       },
     },
   });
+
+  useEffect(() => {
+    const shade = JSON.parse(config).shade ?? "none";
+    if (shade == "red") {
+      setColor({
+        r: 255,
+        g: 0,
+        b: 0,
+        a: 1,
+      });
+    } else if (shade == "blue") {
+      setColor({
+        r: 0,
+        g: 0,
+        b: 255,
+        a: 1,
+      });
+    } else if (shade == "green") {
+      setColor({
+        r: 0,
+        g: 255,
+        b: 0,
+        a: 1,
+      });
+    }
+  }, [config]);
 
   return (
     <div ref={colorRef}>
