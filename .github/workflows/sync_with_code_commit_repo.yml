@@ -1,0 +1,40 @@
+name: Sync With Code Commit Repository
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync_with_codecommit_repo:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with: 
+        fetch-depth: 0
+
+    - name: Set up SSH key
+      run: |
+        set -x
+        mkdir -p ~/.ssh/
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+
+        echo "Host git-codecommit.*.amazonaws.com
+        User ${{ secrets.SSH_KEY_ID }}
+        IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
+        cat ~/.ssh/config
+
+        ssh-keyscan git-codecommit.us-east-1.amazonaws.com >> ~/.ssh/known_hosts
+        cat ~/.ssh/known_hosts
+
+    - name: Sync With Remote Code Commit Repo 
+      env: 
+        DEST_REPO: ssh://git-codecommit.us-east-1.amazonaws.com/v1/repos/github-action 
+        DEST_BRANCH: master
+      run: |
+        set -x
+        git status
+        git branch -m $DEST_BRANCH 
+        git remote add mirror-repo "$DEST_REPO"
+        git remote -v
+        git push -u mirror-repo $DEST_BRANCH --force
