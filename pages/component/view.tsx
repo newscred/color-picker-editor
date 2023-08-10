@@ -25,17 +25,19 @@ export default function Component() {
           hostChannel.sendMessage({ type: "get:field-value" });
           hostChannel.sendMessage({ type: "get:field-config" });
           hostChannel.sendMessage({
-            type: "set:height",
-            height: "50px",
+            type: "set:style",
+            data: {
+              height: "50px",
+            },
           });
           return;
         }
         case "field-value": {
-          if (message?.content?.color) setColor(message?.content?.color);
+          if (message?.data?.color) setColor(message?.data?.color);
           return;
         }
         case "field-config": {
-          setConfig(message.config ?? "{}");
+          setConfig(message.data ?? "{}");
           return;
         }
       }
@@ -43,7 +45,7 @@ export default function Component() {
   });
 
   const handleClick = () => {
-    hostChannel.sendMessage({ type: "set:mode", mode: "edit" });
+    hostChannel.sendMessage({ type: "set:mode", data: "edit" });
   };
 
   useEffect(() => {
