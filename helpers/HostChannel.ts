@@ -37,19 +37,21 @@ type HostMessage =
   | { type: "connected" }
   | {
       type: "field-value";
-      content: any;
-      title: string;
+      data: { color: { r: number; g: number; b: number; a: number } };
     }
   | {
       type: "field-config";
-      config: string;
+      data: string;
     };
 
 type ComponentMessage =
   | { type: "connect" }
   | { type: "get:field-value" }
   | { type: "get:field-config" }
-  | { type: "set:field-value"; content: any }
+  | {
+      type: "set:field-value";
+      data: { color: { r: number; g: number; b: number; a: number } };
+    }
   | { type: "get:mode" }
-  | { type: "set:mode"; mode: "view" | "edit" }
-  | { type: "set:height"; height: string };
+  | { type: "set:mode"; data: "view" | "edit" }
+  | { type: "set:style"; data: { height: string } };

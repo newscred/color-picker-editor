@@ -28,17 +28,19 @@ export default function Component() {
           hostChannel.sendMessage({ type: "get:field-value" });
           hostChannel.sendMessage({ type: "get:field-config" });
           hostChannel.sendMessage({
-            type: "set:height",
-            height: "350px",
+            type: "set:style",
+            data: {
+              height: "350px",
+            },
           });
           return;
         }
         case "field-value": {
-          if (message?.content?.color) setColor(message?.content?.color);
+          if (message?.data?.color) setColor(message?.data?.color);
           return;
         }
         case "field-config": {
-          setConfig(message.config ?? "{}");
+          setConfig(message.data ?? "{}");
           return;
         }
       }
@@ -46,14 +48,14 @@ export default function Component() {
   });
 
   const handleClose = () => {
-    hostChannel.sendMessage({ type: "set:mode", mode: "view" });
+    hostChannel.sendMessage({ type: "set:mode", data: "view" });
   };
 
   const handleChange = (color: ColorResult) => {
     const colorWithOpacity = { ...color.rgb, a: color.rgb.a ?? 1 };
     hostChannel.sendMessage({
       type: "set:field-value",
-      content: {
+      data: {
         color: colorWithOpacity,
       },
     });
