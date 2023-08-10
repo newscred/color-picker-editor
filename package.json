@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "start-production": "next start -p 8030"
+    "start-production": "next start -p 8000"
   },
   "dependencies": {
     "axios": "^1.3.6",
