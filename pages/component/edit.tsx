@@ -79,6 +79,10 @@ export default function Component() {
   });
 
   useEffect(() => {
+    if (color !== DEFAULT_COLOR) {
+      return;
+    }
+
     const shade = JSON.parse(config).shade ?? "none";
     if (shade == "red") {
       setColor({
