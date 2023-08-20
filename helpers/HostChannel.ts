@@ -41,7 +41,7 @@ type HostMessage =
     }
   | {
       type: "field-config";
-      data: string;
+      data: { shade?: string };
     };
 
 type ComponentMessage =

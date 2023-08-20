@@ -16,7 +16,7 @@ const DEFAULT_COLOR = {
 export default function Component() {
   const colorRef = useRef<HTMLDivElement>(null);
   const [color, setColor] = useState(DEFAULT_COLOR);
-  const [config, setConfig] = useState<string>("{}");
+  const [config, setConfig] = useState<{ shade?: string }>({});
 
   const hostChannel = useHostChannel({
     onMessage(message) {
@@ -37,7 +37,7 @@ export default function Component() {
           return;
         }
         case "field-config": {
-          setConfig(message.data ?? "{}");
+          setConfig(message.data ?? {});
           return;
         }
       }
@@ -53,7 +53,7 @@ export default function Component() {
       return;
     }
 
-    const shade = JSON.parse(config).shade ?? "none";
+    const shade = config.shade ?? "none";
     if (shade == "red") {
       setColor({
         r: 255,
@@ -76,7 +76,7 @@ export default function Component() {
         a: 1,
       });
     }
-  }, [config]);
+  }, [color, config]);
 
   return (
     <div ref={colorRef}>
