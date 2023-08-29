@@ -1,3 +1,5 @@
+import { Color } from "./types";
+
 export default class HostChannel {
   port?: MessagePort;
   onMessage?: (message: HostMessage) => void;
@@ -37,7 +39,7 @@ type HostMessage =
   | { type: "connected" }
   | {
       type: "field-value";
-      data: { color: { r: number; g: number; b: number; a: number } };
+      data: { color: Color };
     }
   | {
       type: "field-config";
@@ -50,7 +52,7 @@ type ComponentMessage =
   | { type: "get:field-config" }
   | {
       type: "set:field-value";
-      data: { color: { r: number; g: number; b: number; a: number } };
+      data: { color: Color };
     }
   | { type: "get:mode" }
   | { type: "set:mode"; data: "view" | "edit" }

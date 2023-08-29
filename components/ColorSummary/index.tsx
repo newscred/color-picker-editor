@@ -1,13 +1,6 @@
 import React from "react";
 import reactCSS from "reactcss";
-import { colord } from "colord";
-
-interface Color {
-  r: number;
-  g: number;
-  b: number;
-  a: number;
-}
+import { Color } from "@/helpers/types";
 
 interface ComponentProps {
   color: Color;
@@ -20,13 +13,13 @@ export default function Component({ color, onClick }: ComponentProps) {
       container: {
         display: "flex",
         alignItems: "center",
-        marginBottom: "5px"
+        marginBottom: "5px",
       },
       color: {
         width: "36px",
         height: "14px",
         borderRadius: "2px",
-        background: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+        background: color,
       },
       swatch: {
         padding: "5px",
@@ -50,7 +43,7 @@ export default function Component({ color, onClick }: ComponentProps) {
       <div style={styles.swatch} onClick={onClick}>
         <div style={styles.color} />
       </div>
-      <div style={styles.text}>{colord(color).toHex()}</div>
+      <div style={styles.text}>{color}</div>
     </div>
   );
 }
