@@ -1,4 +1,4 @@
-import { Color } from "./types";
+import { Color, Config } from "./types";
 
 export default class HostChannel {
   port?: MessagePort;
@@ -43,7 +43,7 @@ type HostMessage =
     }
   | {
       type: "field-config";
-      data: { shade?: string };
+      data: Config;
     };
 
 type ComponentMessage =
