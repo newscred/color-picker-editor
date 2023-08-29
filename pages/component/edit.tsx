@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import reactCSS from "reactcss";
 import { SketchPicker, ColorResult } from "react-color";
 import useHostChannel from "@/hooks/useHostChannel";
-import { Color } from "@/helpers/types";
+import { Color, Config } from "@/helpers/types";
 
 const ColorSummary = dynamic(() => import("@/components/ColorSummary"), {
   loading: () => <p>Loading...</p>,
@@ -15,7 +15,7 @@ const DEFAULT_COLOR = "#000000";
 export default function Component() {
   const colorRef = useRef<HTMLDivElement>(null);
   const [color, setColor] = useState<Color | null>(null);
-  const [config, setConfig] = useState<{ shade?: string }>({});
+  const [config, setConfig] = useState<Config>({});
 
   const hostChannel = useHostChannel({
     onMessage(message) {
