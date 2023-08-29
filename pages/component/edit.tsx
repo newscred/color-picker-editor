@@ -5,6 +5,7 @@ import reactCSS from "reactcss";
 import { SketchPicker, ColorResult } from "react-color";
 import useHostChannel from "@/hooks/useHostChannel";
 import { Color, Config } from "@/helpers/types";
+import { colord } from "colord";
 
 const ColorSummary = dynamic(() => import("@/components/ColorSummary"), {
   loading: () => <p>Loading...</p>,
@@ -48,13 +49,15 @@ export default function Component() {
   };
 
   const handleChange = (color: ColorResult) => {
+    const c = color.rgb;
+    const hex = colord(`rgba(${c.r}, ${c.g}, ${c.b}, ${c.a})`).toHex();
     hostChannel.sendMessage({
       type: "set:field-value",
       data: {
-        color: color.hex,
+        color: hex,
       },
     });
-    setColor(color.hex);
+    setColor(hex);
   };
 
   const styles = reactCSS({
