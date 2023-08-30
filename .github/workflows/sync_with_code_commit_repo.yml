@@ -4,6 +4,11 @@ on:
     branches:
       - main
 
+env:
+  DEST_REPO: ssh://git-codecommit.us-east-1.amazonaws.com/v1/repos/system-container-ec-77c330ea466411eeae0202420ac8001a 
+  DEST_BRANCH: master
+  HOST_NAME: git-codecommit.us-east-1.amazonaws.com
+
 jobs:
   sync_with_codecommit_repo:
     runs-on: ubuntu-latest
@@ -14,18 +19,18 @@ jobs:
 
     - name: Set up SSH key
       run: |
-        set -x
-        mkdir -p ~/.ssh/
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
+          set -x
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
 
-        echo "Host git-codecommit.*.amazonaws.com
-        User ${{ secrets.SSH_KEY_ID }}
-        IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
-        cat ~/.ssh/config
+          echo "Host git-codecommit.*.amazonaws.com
+          User ${{ secrets.SSH_KEY_ID }}
+          IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
+          cat ~/.ssh/config
 
-        ssh-keyscan git-codecommit.us-east-1.amazonaws.com >> ~/.ssh/known_hosts
-        cat ~/.ssh/known_hosts
+          ssh-keyscan "$HOST_NAME" >> ~/.ssh/known_hosts
+          cat ~/.ssh/known_hosts
 
     - name: Sync With Remote Code Commit Repo 
       env: 
