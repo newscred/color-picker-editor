@@ -5,7 +5,7 @@ on:
       - main
 
 env:
-  DEST_REPO: ssh://git-codecommit.us-east-1.amazonaws.com/v1/repos/system-container-ec-77c330ea466411eeae0202420ac8001a 
+  DEST_REPO: ssh://git-codecommit.us-east-1.amazonaws.com/v1/repos/system-container-ec-dd26c60040f011ee8dce863441927fbb 
   DEST_BRANCH: master
   HOST_NAME: git-codecommit.us-east-1.amazonaws.com
 
