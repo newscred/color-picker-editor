@@ -32,10 +32,7 @@ jobs:
           ssh-keyscan "$HOST_NAME" >> ~/.ssh/known_hosts
           cat ~/.ssh/known_hosts
 
-    - name: Sync With Remote Code Commit Repo 
-      env: 
-        DEST_REPO: ssh://git-codecommit.us-east-1.amazonaws.com/v1/repos/github-action 
-        DEST_BRANCH: master
+    - name: Sync With Remote Code Commit Repository
       run: |
         set -x
         git status
