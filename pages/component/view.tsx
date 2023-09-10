@@ -11,7 +11,7 @@ const DEFAULT_COLOR = "#000000";
 
 export default function Component() {
   const colorRef = useRef<HTMLDivElement>(null);
-  const [color, setColor] = useState<Color | null>(null);
+  const [color, setColor] = useState<Color | undefined>();
   const [config, setConfig] = useState<Config>({});
 
   const hostChannel = useHostChannel({
