@@ -45,18 +45,16 @@ export default function Component() {
   });
 
   const handleClose = () => {
+    hostChannel.sendMessage({
+      type: "set:field-value",
+      data: color ? { color } : undefined,
+    });
     hostChannel.sendMessage({ type: "set:mode", data: "view" });
   };
 
   const handleChange = (color: ColorResult) => {
     const c = color.rgb;
     const hex = colord(`rgba(${c.r}, ${c.g}, ${c.b}, ${c.a})`).toHex();
-    hostChannel.sendMessage({
-      type: "set:field-value",
-      data: {
-        color: hex,
-      },
-    });
     setColor(hex);
   };
 
