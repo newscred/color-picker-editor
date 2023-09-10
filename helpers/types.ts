@@ -8,7 +8,7 @@ export type HostMessage =
   | { type: "connected" }
   | {
       type: "field-value";
-      data: { color: Color };
+      data: { color: Color } | undefined;
     }
   | {
       type: "field-config";
@@ -21,7 +21,7 @@ export type ComponentMessage =
   | { type: "get:field-config" }
   | {
       type: "set:field-value";
-      data: { color: Color };
+      data: { color: Color } | undefined;
     }
   | { type: "get:mode" }
   | { type: "set:mode"; data: "view" | "edit" }
