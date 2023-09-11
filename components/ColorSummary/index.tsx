@@ -1,11 +1,17 @@
 import React from "react";
 import reactCSS from "reactcss";
 import { Color } from "@/helpers/types";
+import { Inter } from "next/font/google";
 
 interface ComponentProps {
   color: Color;
   onClick: () => void;
 }
+
+const textFont = Inter({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export default function Component({ color, onClick }: ComponentProps) {
   const styles = reactCSS({
@@ -30,10 +36,13 @@ export default function Component({ color, onClick }: ComponentProps) {
         cursor: "pointer",
       },
       text: {
+        ...textFont.style,
+        color: "#080736",
+        fontSize: "14px",
+        letterSpacing: "0.15px",
+        lineHeight: "20px",
         paddingLeft: "10px",
         display: "inline-block",
-        fontSize: "20px",
-        fontFamily: "Inter, Helvetica, Arial, sans-serif",
       },
     },
   });
