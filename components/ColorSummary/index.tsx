@@ -13,7 +13,10 @@ const textFont = Inter({
   subsets: ["latin"],
 });
 
+const DEFAULT_COLOR = "#ffffff";
+
 export default function Component({ color, onClick }: ComponentProps) {
+
   const styles = reactCSS({
     default: {
       container: {
@@ -25,7 +28,7 @@ export default function Component({ color, onClick }: ComponentProps) {
         width: "36px",
         height: "14px",
         borderRadius: "2px",
-        background: color,
+        background: color ?? DEFAULT_COLOR,
       },
       swatch: {
         padding: "5px",
