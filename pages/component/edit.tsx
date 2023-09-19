@@ -11,7 +11,7 @@ const ColorSummary = dynamic(() => import("@/components/ColorSummary"), {
   loading: () => <p>Loading...</p>,
 });
 
-const DEFAULT_COLOR = "#000000";
+const DEFAULT_COLOR = "#ffffff";
 
 export default function Component() {
   const colorRef = useRef<HTMLDivElement>(null);
@@ -93,7 +93,7 @@ export default function Component() {
 
   return (
     <div ref={colorRef}>
-      <ColorSummary color={displayColor} onClick={() => {}} />
+      <ColorSummary color={color} onClick={() => {}} />
       <div style={styles.popover}>
         <div style={styles.cover} onClick={handleClose} />
         <SketchPicker color={displayColor} onChange={handleChange} />
