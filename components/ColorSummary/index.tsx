@@ -4,7 +4,7 @@ import { Color } from "@/helpers/types";
 import { Inter } from "next/font/google";
 
 interface ComponentProps {
-  color: Color;
+  color: Color | undefined;
   onClick: () => void;
 }
 
@@ -52,7 +52,7 @@ export default function Component({ color, onClick }: ComponentProps) {
       <div style={styles.swatch} onClick={onClick}>
         <div style={styles.color} />
       </div>
-      <div style={styles.text}>{color}</div>
+      {color && <div style={styles.text}>{color}</div>}
     </div>
   );
 }

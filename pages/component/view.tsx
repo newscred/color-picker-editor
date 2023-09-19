@@ -7,7 +7,6 @@ const ColorSummary = dynamic(() => import("@/components/ColorSummary"), {
   loading: () => <p>Loading...</p>,
 });
 
-const DEFAULT_COLOR = "#000000";
 
 export default function Component() {
   const colorRef = useRef<HTMLDivElement>(null);
@@ -59,11 +58,9 @@ export default function Component() {
     }
   }, [color, config]);
 
-  const displayColor = color ?? DEFAULT_COLOR;
-
   return (
     <div ref={colorRef}>
-      <ColorSummary color={displayColor} onClick={handleClick} />
+      <ColorSummary color={color} onClick={handleClick} />
     </div>
   );
 }
