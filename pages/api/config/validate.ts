@@ -8,19 +8,19 @@ const handler = async (req: NextApiRequest, res: Response) => {
 
   const shade = req.body.shade;
   const validShades = ["red", "green", "blue"];
-  if (shade == null || validShades.includes(shade)) {
-    res.status(200).json({ message: "OK" });
+  if (shade != null && !validShades.includes(shade)) {
+    res.status(422).json({
+      message: `Shade cannot be ${shade}`,
+      details: {
+        shade: {
+          message: `Shade cannot be ${shade}`,
+        },
+      },
+    });
     return;
   }
 
-  res.status(422).json({
-    message: `Shade cannot be ${shade}`,
-    details: {
-      shade: {
-        message: `Shade cannot be ${shade}`,
-      },
-    },
-  });
+  res.status(200).json({ message: "OK" });
 };
 
 type Response = NextApiResponse<{
