@@ -6,12 +6,18 @@ import { SketchPicker, ColorResult } from "react-color";
 import useHostChannel from "@/hooks/useHostChannel";
 import { Color, Config } from "@/helpers/types";
 import { colord } from "colord";
+import { Inter } from "next/font/google";
 
 const ColorSummary = dynamic(() => import("@/components/ColorSummary"), {
   loading: () => <p>Loading...</p>,
 });
 
 const DEFAULT_COLOR = "#ffffff";
+
+const textFont = Inter({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export default function Component() {
   const colorRef = useRef<HTMLDivElement>(null);
@@ -58,6 +64,14 @@ export default function Component() {
     setColor(hex);
   };
 
+  const handleDelete = () => {
+    setColor(undefined);
+    hostChannel.sendMessage({
+      type: "set:field-value",
+      data: undefined,
+    });
+  };
+
   const styles = reactCSS({
     default: {
       popover: {
@@ -70,6 +84,18 @@ export default function Component() {
         right: "0px",
         bottom: "0px",
         left: "0px",
+      },
+      deleteButtonContainer: {
+        position: "relative" as "relative",
+        zIndex: 3,
+        marginBottom: "5px",
+      },
+      deleteButton: {
+        ...textFont.style,
+        color: "#080736",
+        fontSize: "14px",
+        letterSpacing: "0.15px",
+        lineHeight: "20px",
       },
     },
   });
@@ -94,6 +120,11 @@ export default function Component() {
   return (
     <div ref={colorRef}>
       <ColorSummary color={color} onClick={() => {}} />
+      <div style={styles.deleteButtonContainer}>
+        <button style={styles.deleteButton} onClick={handleDelete}>
+          Delete
+        </button>
+      </div>
       <div style={styles.popover}>
         <div style={styles.cover} onClick={handleClose} />
         <SketchPicker color={displayColor} onChange={handleChange} />
