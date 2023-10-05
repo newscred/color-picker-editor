@@ -9,14 +9,16 @@ const handler = async (
     return;
   }
 
-  const color = req.body.color;
+  const color = req.body?.value?.color;
 
   if (typeof color !== "string") {
     return res.status(422).json({ message: "No 'color' hex string found" });
   }
-  
+
   if (!color.match(/^#[0-9a-f]{6}([0-9a-f]{2})?$/i)) {
-    return res.status(422).json({ message: `'${color}' is not a valid hex color string` });
+    return res
+      .status(422)
+      .json({ message: `'${color}' is not a valid hex color string` });
   }
 
   res.status(200).json({ message: "OK" });
