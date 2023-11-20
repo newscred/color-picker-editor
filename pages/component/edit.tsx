@@ -30,6 +30,9 @@ export default function Component() {
               height: "350px",
             },
           });
+          hostChannel.sendMessage({
+            type: "get:mode",
+          });
           return;
         }
         case "field-value": {
@@ -38,6 +41,10 @@ export default function Component() {
         }
         case "field-config": {
           setConfig(message.data ?? {});
+          return;
+        }
+        case "mode": {
+          console.log("The current mode is", message.data);
           return;
         }
       }
