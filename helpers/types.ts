@@ -13,6 +13,10 @@ export type HostMessage =
   | {
       type: "field-config";
       data: Config;
+    }
+  | {
+      type: "mode";
+      data: "view" | "edit";
     };
 
 export type ComponentMessage =
