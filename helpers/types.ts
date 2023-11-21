@@ -1,3 +1,4 @@
+export type Mode = "view" | "edit";
 export type Color = string;
 
 export type Config = {
@@ -16,7 +17,7 @@ export type HostMessage =
     }
   | {
       type: "mode";
-      data: "view" | "edit";
+      data: Mode;
     };
 
 export type ComponentMessage =
@@ -28,5 +29,5 @@ export type ComponentMessage =
       data: { color: Color } | undefined;
     }
   | { type: "get:mode" }
-  | { type: "set:mode"; data: "view" | "edit" }
+  | { type: "set:mode"; data: Mode}
   | { type: "set:style"; data: { height: string } };
