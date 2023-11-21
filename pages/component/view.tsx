@@ -39,7 +39,7 @@ export default function Component() {
           return;
         }
         case "mode": {
-          console.log("The current mode is", message.data);
+          console.log("From view component: The current mode is", message.data);
           return;
         }
       }
