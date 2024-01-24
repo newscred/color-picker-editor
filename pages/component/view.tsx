@@ -7,7 +7,6 @@ const ColorSummary = dynamic(() => import("@/components/ColorSummary"), {
   loading: () => <p>Loading...</p>,
 });
 
-
 export default function Component() {
   const colorRef = useRef<HTMLDivElement>(null);
   const [color, setColor] = useState<Color | undefined>();
@@ -19,6 +18,7 @@ export default function Component() {
         case "connected": {
           hostChannel.sendMessage({ type: "get:field-value" });
           hostChannel.sendMessage({ type: "get:field-config" });
+          hostChannel.sendMessage({ type: "get:field-context" });
           hostChannel.sendMessage({
             type: "set:style",
             data: {
@@ -40,6 +40,11 @@ export default function Component() {
         }
         case "mode": {
           console.log("From view component: The current mode is", message.data);
+          return;
+        }
+        case "field-context": {
+          const { taskId, contentGuid } = message.data;
+          console.log(`Task ID ${taskId} & Content GUID ${contentGuid}`);
           return;
         }
       }
