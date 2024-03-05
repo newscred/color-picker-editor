@@ -1,0 +1,11 @@
+{
+    "name": "Color Picker",
+    "description": "Color Picker Remote Field",
+    "parameters": {
+        "API_KEY": {
+            "label": "Api Key",
+            "type": "text",
+            "required": true
+        }
+    }
+}
