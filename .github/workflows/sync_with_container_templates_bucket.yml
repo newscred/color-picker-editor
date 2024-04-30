@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - t6-378
 
 env:
   zip_file_name: ${{ github.event.repository.name }}.zip
