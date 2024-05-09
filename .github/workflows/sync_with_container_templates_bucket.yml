@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  zip_file_name: ${{ github.event.repository.name }}.zip
+  zip_file_name: ${{ github.event.repository.name }}-${{ github.head_ref || github.ref_name }}.zip
 
 jobs:
   upload-templates:
