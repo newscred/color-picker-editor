@@ -7,7 +7,9 @@ on:
       - t6-378
 
 env:
-  zip_file_name: ${{ github.event.repository.name }}.zip
+  repo_name: ${{ github.event.repository.name }}
+  branch_name: ${{ github.head_ref || github.ref_name }}
+  zip_file_name: ${{ env.repo_name }}-${{ env.branch_name }}.zip
 
 jobs:
   upload-templates:
