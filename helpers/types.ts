@@ -8,6 +8,7 @@ export type Config = {
 export type Context = {
   taskId: string;
   contentGuid: string;
+  userId: string;
 };
 
 export type HostMessage =

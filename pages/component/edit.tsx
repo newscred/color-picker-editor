@@ -49,8 +49,7 @@ export default function Component() {
           return;
         }
         case "field-context": {
-          const { taskId, contentGuid } = message.data;
-          console.log(`Task ID ${taskId} & Content GUID ${contentGuid}`);
+          console.log("Context: ", message.data);
           return;
         }
       }
